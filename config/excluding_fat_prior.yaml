@@ -1,0 +1,12 @@
+input_dims: !!python/tuple
+- 2  # separate channels for the real and imaginary part
+- 64  # patch height
+- 64  # patch width
+
+unet_coupling: false  # whether to use the U-Net to implement the transformations in the affine coupling layers
+n_levels: 3  # the number of levels
+depth: 32  # the number of flowsteps in each level
+width: 256  # the number of channels of the convolutions in the affine coupling layers
+
+affine_scale_low: 0.5  # the output of the sigmoid in the affine coupling layer gets scaled to (affine_scale_low, 1)
+try_to_center: false  # whether to subtract 0.5 from each pixel before passing the patch through the model

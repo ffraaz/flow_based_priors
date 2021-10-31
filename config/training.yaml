@@ -1,0 +1,52 @@
+dataset: train  # the subset of the fastMRI dataset to train on (one of train, val, test, and challenge)
+challenge: multicoil  # one of singlecoil or multicoil
+mid_slice_range: 0  # train on the middle slice +/- mid_slice_range of each volume
+
+
+# the optimal values of some parameters differ between fat-suppressed images (excluding_fat)
+# and non-fat-suppressed images (including_fat)
+reduce_precise:  # whether to replace the magnitude of the MVUE image with the RSS estimate. Only relevant if challenge == 'multicoil'
+  including_fat: true
+  excluding_fat: false
+
+sens_params:  # parameters that get directly passed to ecalib from the Bart toolbox (see utils.get_sens_maps for details)
+  including_fat: ''
+  excluding_fat: -W -c0
+
+unet_coupling:  # whether to use the U-Net to implement the transformations in the affine coupling layers
+  including_fat: true
+  excluding_fat: false
+
+depth:  # the number of flowsteps in each level
+  including_fat: 10
+  excluding_fat: 32
+
+width:  # the number of channels of the convolutions in the affine coupling layers
+  including_fat: null  # width parameter is not used when unet_coupling == true
+  excluding_fat: 256
+
+patch_size:  # using square patches of shape (patch_size, patch_size)
+  including_fat: 128
+  excluding_fat: 64
+
+n_levels: 3  # the number of levels
+beta_ln: 0  # relative weight of the latent noise loss term
+
+lr: 0.0001  # learning rate of Adam
+batch_size: 16  # training batch size
+n_iter: 15000  # number of iterations to train for
+batch_size_init: 256  # batch size for the data dependent initialization
+n_iter_warmup: 300  # number of warmup epochs for linear learning rate warmup
+
+num_workers: 5  # number of workers to use for the dataloader
+start_epoch: 0  # only used for logging
+grad_norm_clip: 50  # the maximum norm of the gradients
+checkpoint_grads: false  # whether to use gradient checkpointing
+
+save_checkpoints: true  # whether to save intermediate checkpoints of the model
+save_interval: 50  # how often to save checkpoints of the model
+generate_interval: 200  # how often to generate samples and log them to tensorboard
+log_interval: 1  # how often to log the loss to tensorboard
+
+affine_scale_low: 0.5  # the output of the sigmoid in the affine coupling layer gets scaled to (affine_scale_low, 1)
+try_to_center: false  # whether to subtract 0.5 from each pixel before passing the patch through the model

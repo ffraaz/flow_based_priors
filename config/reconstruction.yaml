@@ -1,0 +1,29 @@
+dataset: val  # the subset of the fastMRI dataset (one of train, val, test, and challenge)
+challenge: multicoil  # one of singlecoil or multicoil
+acceleration: 4  # the undersampling factor to use
+center_fraction: 0.08  # fraction of low-frequency columns to be retained
+
+# the optimal values for lr and gamma differ between fat-suppressed images (excluding_fat)
+# and non-fat-suppressed images (including_fat)
+lr:  # learning rate of Adam
+  including_fat: 0.08
+  excluding_fat: 0.02
+
+gamma:  # how much to weigh the norm of the latent vector compared to the data loss
+  including_fat: 0.001
+  excluding_fat: 0.01
+
+crop_size:  # spatially crop the kspace to this shape
+  including_fat: null
+  excluding_fat: !!python/tuple
+  - 450
+  - null
+
+pad_sides: false  # whether to pad the sides of the kspace with zeros (only used when reconstructing brain images)
+overlap: 0  # the number of pixels of overlap between adjacent patches
+normalize: true  # whether to divide the kspace by the maximum pixel value of the zero-filled reconstruction
+sens_params: -W -c0  # parameters that get directly passed to ecalib from the Bart toolbox (see utils.get_sens_maps for details)
+
+n_iter: 1000  # the number of iterations of the reconstruction
+save_interval: 50  # how often to save the latent vector
+log_interval: 1  # how often to log the loss to tensorboard
