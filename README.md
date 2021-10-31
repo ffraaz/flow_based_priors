@@ -55,6 +55,7 @@ python -m unittest
 ```
 
 ## Acknowledgments
+The thesis is supervised by [Prof. Dr. Reinhard Heckel](http://reinhardheckel.com/).
 The Glow implementation in `glow.py` and `train_glow.py` is taken from [here](https://github.com/kamenbliznashki/normalizing_flows).
 
 ## License
