@@ -1,6 +1,7 @@
 # Accelerated Magnetic Resonance Imaging with Flow-Based Priors
-This repository contains code for the master's thesis "Accelerated Magnetic Resonance Imaging with Flow-Based Priors".
-In the thesis, we reconstruct MR images from undersampled measurements by imposing a trained generative model as a prior.
+This repository contains code for the master's thesis [Accelerated Magnetic Resonance Imaging with Flow-Based Priors](https://www.dropbox.com/s/t25jdo0gvc1z7gl/Accelerated%20Magnetic%20Resonance%20Imaging%20with%20Flow-Based%20Priors.pdf?dl=0).
+In the thesis, we first train a flow-based generator on patches of MR images and then impose it as a prior for reconstructing an image from undersampled MRI measurements.
+
 Below, we outline the usage of three components:
 * Reconstructing a single image.
 * Evaluating on an entire dataset.
